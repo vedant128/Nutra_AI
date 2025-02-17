@@ -4,7 +4,7 @@
 
 Virtual Health Assistants, such as chatbots and voice assistants, are revolutionizing healthcare by providing personalized health advice, answering medical queries, scheduling appointments, and sending medication reminders. These AI-powered tools improve patient engagement and streamline communication between patients and healthcare providers.
 
-![Image](image.png)
+![Image](outputs/image1.png)
 
 ## Key Features
 
@@ -24,3 +24,5 @@ Virtual Health Assistants, such as chatbots and voice assistants, are revolution
 - **62%** of people prefer virtual healthcare solutions (Accenture).
 - **57%** of people want remote monitoring for chronic conditions (Accenture).
 - AI is transforming healthcare, with benefits in patient and clinician experiences (IBM).
+
+![Image1](outputs/image.png)
