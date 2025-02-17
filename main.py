@@ -138,7 +138,7 @@ def dashboard():
     return render_template("dashboard.html", routine=routine, edit_form=edit_form)
 
 
-@app.route("/expert", methods=["GET", "POST"])
+@app.route('/expert', methods=["GET", "POST"])
 def expert():
     if "user_id" not in session:
         flash("Please log in to access this page.", "danger")

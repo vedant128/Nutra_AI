@@ -47,7 +47,7 @@ def set_reminder():
     data = request.json
     reminder_for = data['reminder_for']
     reminder_time = data['reminder_time']
-    recipient_email = data.get('email', "gmaroof99@gmail.com")  # Use user's email if provided
+    recipient_email = data.get('email', "vedantgunjal2005@gmail.com")  # Use user's email if provided
 
     # Schedule the reminder
     try:
