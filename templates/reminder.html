@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>Reminder Page</h1>
+    <button onclick="showForm()">Set Reminder</button>
+    <div id="form-container" style="display: none;">
+        <form id="reminder-form">
+            <label for="reminder-for">Reminder For:</label>
+            <input type="text" id="reminder-for" name="reminder_for" required>
+            <br><br>
+            <label for="reminder-time">Time:</label>
+            <input type="time" id="reminder-time" name="reminder_time" required>
+            <br><br>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <script>
+        function showForm() {
+            document.getElementById("form-container").style.display = "block";
+        }
+
+        document.getElementById("reminder-form").onsubmit = async (e) => {
+            e.preventDefault();
+            const data = {
+                reminder_for: document.getElementById("reminder-for").value,
+                reminder_time: document.getElementById("reminder-time").value,
+            };
+            const response = await fetch('/set_reminder', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data),
+            });
+            const result = await response.json();
+            alert(result.message);
+        };
+    </script>
+</body>
+</html>
