@@ -2,10 +2,16 @@ from flask import Flask, render_template, redirect, url_for, request, flash, ses
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime
+from datetime import datetime
+import os
+from dotenv import load_dotenv
 import google.generativeai as genai
 
+# Load environment variables
+load_dotenv()
+
 # Configure the Generative AI API
-genai.configure(api_key="AIzaSyDlGsewmGEAytSdQa8CZUjiLvHgo-gO-eA")
+genai.configure(api_key=os.environ.get("GOOGLE_API_KEY"))
 
 # Generative AI model configuration
 generation_config = {
@@ -18,7 +24,7 @@ generation_config = {
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
-app.config['SECRET_KEY'] = 'your_secret_key'
+app.config['SECRET_KEY'] = os.environ.get("FLASK_SECRET_KEY", "your_secret_key")
 db = SQLAlchemy(app)
 
 # Database models
@@ -169,7 +175,7 @@ def generate_response(user_input):
         return "Please update your dietary preferences and health goal in the dashboard."
 
     model = genai.GenerativeModel(
-        model_name="gemini-2.0-flash-exp",
+        model_name="gemini-2.5-flash",
         generation_config=generation_config,
         system_instruction=(
             f"You are an expert named NutraAI that integrates physical and mental health management. "
@@ -181,15 +187,19 @@ def generate_response(user_input):
         ),
     )
 
-    chat_session = model.start_chat(history=history)
-    response = chat_session.send_message(user_input)
-    model_response = response.text
+    try:
+        chat_session = model.start_chat(history=history)
+        response = chat_session.send_message(user_input)
+        model_response = response.text
 
-    # Update history
-    history.append({"role": "user", "parts": [user_input]})
-    history.append({"role": "model", "parts": [model_response]})
+        # Update history
+        history.append({"role": "user", "parts": [user_input]})
+        history.append({"role": "model", "parts": [model_response]})
 
-    return model_response
+        return model_response
+    except Exception as e:
+        print(f"Error generating response: {e}")
+        return f"Error: {str(e)}"
 
 
 if __name__ == "__main__":

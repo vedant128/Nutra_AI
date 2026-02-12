@@ -1,0 +1,24 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual Environment
+venv/
+env/
+.env
+
+# Database
+*.db
+*.sqlite3
+instance/
+
+# IDEs
+.idea/
+.vscode/
+
+# Project specific
+outputs/
+check_models.py
+check_db.py
+models.txt

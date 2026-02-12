@@ -6,7 +6,7 @@ from sqlalchemy.orm import relationship, DeclarativeBase, Mapped, mapped_column
 from sqlalchemy import Integer, String, Float
 
 # Chatbot part:
-genai.configure(api_key="AIzaSyDlGsewmGEAytSdQa8CZUjiLvHgo-gO-eA")
+genai.configure(api_key="AIzaSyAMHpAxYWrmfysBtfFHMY-iRnJBcxPh5Ms")
 
 # Create the model
 generation_config = {
